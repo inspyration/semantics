@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+
+
+        <!-- Actions -->
+
+         <record id="action_semantics_field" model="ir.actions.act_window">
+            <field name="name">Semantics - Field Action</field>
+            <field name="res_model">semantics.field</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+         <record id="action_semantics_signifier" model="ir.actions.act_window">
+            <field name="name">Semantics - Signifier Action</field>
+            <field name="res_model">semantics.signifier</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+
+        <!-- Menu -->
+
+    	<menuitem id="menu_semantics_config" 
+			parent="base.menu_custom"
+			name="Semantics config"
+			sequence="40"/>
+
+		<menuitem id="menu_semantics_field" 
+			parent="semantics.menu_semantics_config"
+			name="Fields"
+			action="action_semantics_field"/>
+
+
+
+
+        <!-- Field Views -->
+
+		<record id="view_semantics_field_tree" model="ir.ui.view">
+            <field name="name">semantics.field.tree</field>
+            <field name="model">semantics.field</field>
+            <field name="arch" type="xml">
+                <tree string="Fields">
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="view_semantics_field_form" model="ir.ui.view">
+            <field name="name">semantics.field.form</field>
+            <field name="model">semantics.field</field>
+            <field name="arch" type="xml">
+                <form string="Field Form" version="7.0">
+                	<header>
+                	</header>
+                	<sheet>
+                		 <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                        	<field name="active"/>
+                        	<field name="signifier_ids"/>
+                        </group>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+		
+		<record id="view_semantics_field_kanban" model="ir.ui.view">
+            <field name="name">semantics.field.kanban</field>
+            <field name="model">semantics.field</field>
+			<field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                	<templates>
+                		<t t-name="kanban-box">
+                			<div class="oe_kanban_card oe_kanban_global_click">
+                			
+                				<div class="oe_dropdown_toggle oe_dropdown_kanban">
+                					<span class="oe_e">í</span>
+                					<ul class="oe_dropdown_menu">
+                						<li><a type="edit">Edit...</a></li>
+                						<li><a type="delete">Delete</a></li>
+                					</ul>
+                				</div>
+                				<div class="oe_kanban_content">
+		                			<h2><field name="name"/></h2>
+		                			<field name="signifier_items" invisible="1"/>
+		                			<ul t-if="record.signifier_items.value">
+		                				<li t-foreach="record.signifier_items.value" t-as="signifier" class="bullet">
+		                					<t t-call="signifier_template.sub">
+		                						<t t-set="title" t-value="signifier.name"/>
+		                					</t>
+		                				</li>
+		                			</ul>
+	                			</div>
+                			</div> 	
+                		</t>
+                		<t t-name="signifier_template.sub">
+                			<a t-att-href="'#id='+id+'&amp;view_type=form&amp;model=semantics.signifier'" >
+                				<t t-esc="title"/>
+                			</a>
+                		</t>
+                	</templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+
+	</data>
+</openerp>
