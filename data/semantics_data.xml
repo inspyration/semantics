@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="semantics_field_partner_doc_type" model="semantics.field">
+            <field name="name">Partner's documents types</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="semantics_field_partner_doc_keyword" model="semantics.field">
+            <field name="name">Partner's documents key words</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</openerp>

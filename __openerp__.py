@@ -31,6 +31,7 @@
     'depends' : ['base'],
     'data': [
         'views/semantics_view.xml',
+        'data/semantics_data.xml',
     ],
     'js': [
     ],
