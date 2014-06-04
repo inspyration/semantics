@@ -100,6 +100,7 @@ class Signifier(osv.Model):
         'field_id': fields.many2one(
             'semantics.field',
             string="Field"
+            required=True,
         ),
         'active': fields.boolean(
             string="Active",
